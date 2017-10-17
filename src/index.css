@@ -1,15 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
-
-
-/*@font-face {*/
-  /*font-family: "Roboto";*/
-  /*src: url();*/
-/*}*/
+/*@value colors: "./colors.css";*/
+@value clouds, peter-river from "./colors.css";
 
 html {
   font-family: 'Roboto', sans-serif;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
+  background-color: clouds;
 }
 body {
   margin: 0;

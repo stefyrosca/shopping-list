@@ -1,3 +1,5 @@
+@value blueGrey100, peter-river, deepOrange500 from "../../colors.css";
+
 .container {
     padding-right: 15px;
     padding-left: 15px;
@@ -8,8 +10,25 @@
     min-height: 1px;
     padding-right: 15px;
     padding-left: 15px;
-    width: 20%;
+    width: 25%;
     float: left;
     margin: 20px;
 }
 
+.input {
+    margin: 4em 1em 1em;
+}
+
+.input-field {
+    padding: 0.2em 0.25em;
+    background: transparent;
+    color: blueGrey100;
+    font-size: 1.55em;
+}
+
+label {
+    color: deepOrange500;
+    font-weight: bold;
+    width: 150px;
+}
+label:after { content: ": " }

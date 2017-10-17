@@ -9,7 +9,9 @@ export class ShoppingListComponent extends Component {
 
     render() {
         return <div className={styles.panel}>
-            <h3 className={styles['panel-title']}>{this.props.shoppingList.title}</h3>
+            <span className={styles['panel-heading']}>
+                <h3 className={styles['panel-title']}>{this.props.shoppingList.title}</h3>
+            </span>
             <div className={styles["panel-body"]}>
                 {this.props.shoppingList.items.map((item, index) => {
                     return <div className={styles['panel-content']} key={index}>
