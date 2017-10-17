@@ -11,9 +11,9 @@ class DashboardComponent extends Component {
 
     render() {
         return <div>Dashboard
-            <div className='container'>
+            <div className={style.container}>
                 {this.props.shoppingList.items.map((shoppingList, index) => {
-                    return <div key={index} className={'col'}><ShoppingListComponent shoppingList={shoppingList}/></div>
+                    return <div key={index} className={style.col}><ShoppingListComponent shoppingList={shoppingList}/></div>
                 })}
             </div>
         </div>
