@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
 import {ShoppingListComponent} from "../shopping-list/ShoppingList";
+import style from './style.css'
 
 class DashboardComponent extends Component {
     constructor(props) {
@@ -10,9 +11,9 @@ class DashboardComponent extends Component {
 
     render() {
         return <div>Dashboard
-            <div>
+            <div className='container'>
                 {this.props.shoppingList.items.map((shoppingList, index) => {
-                    return <ShoppingListComponent key={index} shoppingList={shoppingList}/>
+                    return <div key={index} className={'col'}><ShoppingListComponent shoppingList={shoppingList}/></div>
                 })}
             </div>
         </div>

@@ -4,13 +4,12 @@ export class ShoppingListComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {items: []};
-        console.log(this.props.shoppingList)
     }
 
     render() {
-        return <div>Shopping list
-            {this.props.shoppingList.items.map(item => {
-                return <div><span><strong>{item.name}</strong></span> {item.quantity}</div>
+        return <div>
+            {this.props.shoppingList.items.map((item, index) => {
+                return <div key={index}><span><strong>{item.name}</strong></span> {item.quantity}</div>
             })}
             <hr/>
         </div>
