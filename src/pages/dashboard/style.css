@@ -1,9 +1,6 @@
 .container {
     padding-right: 15px;
     padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-    background-color: lightblue;
 }
 
 .col {
@@ -11,9 +8,8 @@
     min-height: 1px;
     padding-right: 15px;
     padding-left: 15px;
-    width: 25%;
+    width: 20%;
     float: left;
-    background-color: aquamarine;
     margin: 20px;
 }
 

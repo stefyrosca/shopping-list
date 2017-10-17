@@ -4,8 +4,10 @@ export class ShoppingList {
     id;
     timestamp;
     items;
+    title;
 
-    constructor(items) {
+    constructor(title, items) {
+        this.title = title;
         this.timestamp = new Date();
         this.items = items;
         this.id = nextId();
