@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import './App.css';
-import Dashboard from "./pages/dashboard/Dashboard";
+import {Route, Router, Switch} from 'react-router'
+import createHistory from 'history/createBrowserHistory'
+import {routes} from './pages'
+
+const history = createHistory();
 
 class App extends Component {
     render() {
@@ -9,7 +13,16 @@ class App extends Component {
                 <header className="App-header">
                     <h1 className="App-title">Shopping list</h1>
                 </header>
-                <Dashboard/>
+                <div>
+                    <Router history={history}>
+                        <Switch>
+                            {routes.map((route, index) => {
+                                return <Route component={route.component} path={route.path} exact={route.exact}
+                                              key={index}/>
+                            })}
+                        </Switch>
+                    </Router>
+                </div>
             </div>
         );
     }

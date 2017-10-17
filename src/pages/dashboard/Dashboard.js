@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
 
-export class Dashboard extends Component {
+export class DashboardComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {dashboards: []};
@@ -12,4 +12,4 @@ export class Dashboard extends Component {
     }
 }
 
-export default connect(state => ({...state}), {})(Dashboard);
+export default connect(state => ({...state}), {})(DashboardComponent);
