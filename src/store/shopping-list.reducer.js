@@ -1,7 +1,9 @@
+import {getShoppingLists} from "../mocks/shopping-list.mock";
+
 const actionHandler = {};
 
 const initialState = {
-    items: []
+    items: getShoppingLists()
 };
 
 export function shoppingListReducer (state = initialState, action) {

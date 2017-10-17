@@ -1,4 +1,4 @@
-import {DashboardComponent} from "./dashboard/Dashboard";
+import DashboardComponent from "./dashboard/Dashboard";
 import {ShoppingListComponent} from "./shopping-list/ShoppingList";
 import NotFound from "./NotFound";
 
