@@ -25,5 +25,3 @@ export class ShoppingListComponent extends Component {
         </div>
     }
 }
-
-// export default connect(state => ({...state}), {})(ShoppingListComponent);

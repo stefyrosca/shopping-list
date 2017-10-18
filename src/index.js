@@ -5,12 +5,15 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import {createInitialStore} from "./store/create-store";
 import Provider from "react-redux/es/components/Provider";
+import createHistory from 'history/createBrowserHistory'
 
-const store = createInitialStore();
+const history = createHistory();
+
+const store = createInitialStore(history);
 
 ReactDOM.render(
     <Provider store={store}>
-        <App/>
+        <App  history={history}/>
     </Provider>,
     document.getElementById('root'));
 registerServiceWorker();

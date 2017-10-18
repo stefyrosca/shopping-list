@@ -1,7 +1,13 @@
 import {getReducers} from "./reducers";
-import {createStore} from "redux";
+import {createStore, applyMiddleware} from "redux";
+import {routerMiddleware} from 'react-router-redux'
 
-export function createInitialStore() {
+
+export function createInitialStore(history) {
+    const middleware = routerMiddleware(history);
     const reducers = getReducers();
-    return createStore(reducers);
+    return createStore(
+        reducers,
+        applyMiddleware(middleware)
+    )
 }
