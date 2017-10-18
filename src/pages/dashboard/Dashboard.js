@@ -47,9 +47,9 @@ class DashboardComponent extends Component {
     }
 
     filterItems(event) {
+        clearTimeout(this.timeout);
         this.setState({...this.state, filterValue: event.target.value}, () => {
-            clearTimeout(this.timeout);
-            setTimeout(() => this.props.filterShoppingLists(this.state.filterValue), 800);
+            this.timeout = setTimeout(() => this.props.filterShoppingLists(this.state.filterValue), 800);
         })
     }
 
