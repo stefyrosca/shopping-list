@@ -1,3 +1,6 @@
+@value blue50: #E3F2FD;
+@value blue100: #BBDEFB;
+@value blue150: #aad9ff;
 @value blue200: #90CAF9;
 @value blue300: #64B5F6;
 @value blue400: #42A5F5;
@@ -5,4 +8,5 @@
 @value grey50: #FAFAFA;
 @value blueGrey50: #ECEFF1;
 @value blueGrey100: #CFD8DC;
+@value blueGrey500: #607D8B;
 @value blueGrey800: #37474F;

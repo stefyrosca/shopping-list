@@ -4,7 +4,7 @@ import {formatDate} from "../../utils/format-date";
 
 export class ShoppingListComponent extends Component {
     render() {
-        return <div className={styles.panel}>
+        return <div className={styles.panel} data-checked={this.props.shoppingList.checked}>
             <div className={styles['panel-heading']}>
                 <h3 className={styles['panel-title']}>{this.props.shoppingList.title}</h3>
             </div>

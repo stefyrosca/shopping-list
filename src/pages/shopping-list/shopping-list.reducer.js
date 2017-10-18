@@ -19,11 +19,16 @@ actionHandler[ShoppingListActions.EDIT_SHOPPING_LIST] = (state, action) => {
 actionHandler[ShoppingListActions.TOGGLE_ITEM_CHECK] = (state, action) => {
     let {shoppingListId, itemId, checked} = action.payload;
     let shoppingList = {...state.items[shoppingListId]};
+    let done = checked;
     shoppingList.items = shoppingList.items.map(item => {
         if (item.id === itemId)
             return {...item, checked};
+        if (item.checked === false) {
+            done = false;
+        }
         return item;
     });
+    shoppingList.checked = done;
     const items = {...state.items, [shoppingListId]: shoppingList};
     return {...state, items};
 };

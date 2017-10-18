@@ -1,4 +1,4 @@
-@value deepOrange500, blueGrey800, blueGrey50, blue200, blue400, blueGrey100 from "../../colors.css";
+@value deepOrange500, blueGrey800, blueGrey50, blue100, blue200, blue400, blueGrey100, blueGrey500, blue150, blue50 from "../../colors.css";
 
 .panel {
     margin-bottom: 20px;
@@ -7,6 +7,18 @@
     box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
     background-color: blue200;
 }
+
+.panel-disabled,
+.panel[data-checked=true],
+.panel[data-checked=true] > .panel-heading {
+    background-color: blue100;
+    color: blueGrey500;
+}
+
+.panel[data-checked=true] > .panel-heading {
+    background-color: blue150;
+}
+
 
 .panel-body {
     padding: 15px;
