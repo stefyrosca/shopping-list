@@ -1,16 +1,21 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
-/*@value colors: "./colors.css";*/
-@value clouds, peter-river from "./colors.css";
+@value grey50, blueGrey800, blueGrey50, deepOrange500 from "./colors.css";
 
 html {
   font-family: 'Roboto', sans-serif;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
-  background-color: clouds;
+  background-color: grey50;
 }
+
 body {
   margin: 0;
 }
+
+ul {
+  padding: 0;
+}
+
 .btn {
   display: inline-block;
   padding: 6px 12px;
@@ -27,4 +32,23 @@ body {
   background-image: none;
   border: 1px solid transparent;
   border-radius: 4px;
+}
+
+.btn-primary {
+  composes: btn;
+  background-color: deepOrange500;
+  color: grey50;
+}
+
+
+.input {
+  margin: 4em 1em 1em;
+  flex: 1;
+}
+
+.input-field {
+  padding: 0.2em 0.25em;
+  font-size: 1.55em;
+  color: blueGrey800;
+  background-color: blueGrey50;
 }

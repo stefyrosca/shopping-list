@@ -20,7 +20,7 @@ class DashboardComponent extends Component {
         return <div>
             <div>
                 <div className={styles.input}>
-                    <label>Filter shopping lists</label>
+                    <label className={styles.label}>Filter shopping lists</label>
                     <input className={styles['input-field']} value={this.state.filterValue}
                            onChange={this.filterItems}/>
                 </div>

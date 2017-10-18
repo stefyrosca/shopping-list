@@ -18,37 +18,43 @@ class CreateShoppingListComponent extends Component {
     }
 
     render() {
-        return <div className={styles['list-group']}>CreateShoppingListComponent
-            <div className={styles.input}>
-                <label>Title</label>
-                <input value={this.state.title} onChange={(event)=>this.setState({...this.state, title: event.target.value})}/>
+        return <div className={styles['list-group']}>
+            <div><h3>Create new shopping list</h3></div>
+            <div>
+                <label className={styles.label}>Title</label>
+                <input className={styles['input-text']}
+                       value={this.state.title}
+                       onChange={(event) => this.setState({...this.state, title: event.target.value})}/>
             </div>
             <div>
                 <ul>
                     {this.state.items.map((item, index) => {
                         return <li key={index} className={styles['list-group-item-info']}>
-                            <span>{item.name}</span> <span>{item.quantity}</span>
+                            <div className={styles.row}>
+                                <div className={`${styles['col-3']} ${styles['align-start']} `}>{item.name}</div>
+                                <div className={styles['col']}>{item.quantity}</div>
+                            </div>
                         </li>
                     })}
                     {this.state.items.length === 0 &&
                     <li className={styles['list-group-item-info']}>
-                        <span>No products added!</span>
+                        <span>No products added</span>
                     </li>
                     }
                 </ul>
             </div>
-            <div>
+            <div className={styles['align-start']}>
                 <div className={styles.row}>
                     <div className={styles['col-3']}>
-                        <label>Description</label>
-                        <br/>
-                        <input value={this.state.newItem.description}
+                        <span className={styles.label}>Description</span>
+                        <input className={styles['input-text']}
+                               value={this.state.newItem.description}
                                onChange={(event) => this.updateValue('description', event.target.value)}/>
                     </div>
                     <div className={styles['col']}>
-                        <label>Quantity</label>
-                        <br/>
-                        <input type={"number"} value={this.state.newItem.quantity}
+                        <span className={styles.label}>Quantity</span>
+                        <input className={styles['input-number']}
+                               type={"number"} value={this.state.newItem.quantity}
                                onChange={(event) => this.updateValue('quantity', event.target.value)}/>
                     </div>
                 </div>

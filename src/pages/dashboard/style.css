@@ -1,4 +1,4 @@
-@value blueGrey800, blueGrey50, deepOrange500, blue200 from "../../colors.css";
+@value blueGrey800, blueGrey50, grey50, deepOrange500, blue200 from "../../colors.css";
 
 .container {
     display: flex;
@@ -7,9 +7,7 @@
 }
 
 .btn-primary {
-    composes: btn from '../../index.css';
-    background-color: deepOrange500;
-    color: blueGrey50;
+    composes: btn-primary from '../../index.css';
 }
 
 .wrapper {
@@ -41,21 +39,17 @@
     margin: 20px;
 }
 
-.input {
-    margin: 4em 1em 1em;
-    flex: 1;
-}
-
 .input-field {
-    padding: 0.2em 0.25em;
-    background: transparent;
-    color: blueGrey800;
-    font-size: 1.55em;
+    composes: input-field from '../../index.css';
 }
 
-label {
+.input {
+    composes: input from '../../index.css';
+}
+
+.label {
     color: deepOrange500;
     font-weight: bold;
     width: 150px;
 }
-label:after { content: ": " }
+.label:after { content: ": " }
