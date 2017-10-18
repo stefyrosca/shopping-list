@@ -2,7 +2,10 @@ import React, {Component} from 'react'
 import {connect} from "react-redux";
 import {ShoppingListComponent} from "../shopping-list/ShoppingList";
 import styles from './style.css'
-import {addShoppingList, filterShoppingLists} from "../shopping-list/shopping-list.actions";
+import {
+    addShoppingList, editShoppingList, filterShoppingLists,
+    toggleItemCheck
+} from "../shopping-list/shopping-list.actions";
 import {PATHS} from "../index";
 
 class DashboardComponent extends Component {
@@ -25,12 +28,18 @@ class DashboardComponent extends Component {
                            onChange={this.filterItems}/>
                 </div>
                 <div className={styles.input}>
-                    <button className={styles['btn-primary']} onClick={() => this.props.history.push(PATHS.CREATE_LIST)}> Add new shopping list</button>
+                    <button className={styles['btn-primary']}
+                            onClick={() => this.props.history.push(PATHS.CREATE_LIST)}> Add new shopping list
+                    </button>
                 </div>
             </div>
             <div className={styles['wrapper-4']}>
                 {this.props.shoppingList.filteredItems.map((id, index) => {
-                    return <div key={index} className={styles.col}><ShoppingListComponent shoppingList={this.props.shoppingList.items[id]}/>
+                    return <div key={index} className={styles.col}>
+                        <ShoppingListComponent
+                            shoppingList={this.props.shoppingList.items[id]}
+                            onCheckItem={this.props.toggleItemCheck}
+                        />
                     </div>
                 })}
             </div>
@@ -46,4 +55,9 @@ class DashboardComponent extends Component {
 
 }
 
-export default connect(state => ({...state}), {filterShoppingLists, addShoppingList})(DashboardComponent);
+export default connect(state => ({...state}), {
+    filterShoppingLists,
+    addShoppingList,
+    editShoppingList,
+    toggleItemCheck
+})(DashboardComponent);

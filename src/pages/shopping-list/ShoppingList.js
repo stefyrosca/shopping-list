@@ -3,11 +3,6 @@ import styles from './style.css'
 import {formatDate} from "../../utils/format-date";
 
 export class ShoppingListComponent extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {items: []};
-    }
-
     render() {
         return <div className={styles.panel}>
             <div className={styles['panel-heading']}>
@@ -17,6 +12,9 @@ export class ShoppingListComponent extends Component {
                 {this.props.shoppingList.items.map((item, index) => {
                     return <div className={styles['panel-content']} key={index}>
                         <div className={styles.row}>
+                            <div className={styles.col}>
+                                <input onChange={(event)=>this.props.onCheckItem(this.props.shoppingList.id, item.id, event.target.checked)} checked={item.checked} type={"checkbox"}/>
+                            </div>
                             <div className={`${styles['col-3']} ${styles['align-start']}`}>{item.name}</div>
                             <div className={styles['col']}>{item.quantity}</div>
                         </div>
