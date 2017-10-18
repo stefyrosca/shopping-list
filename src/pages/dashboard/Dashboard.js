@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from "react-redux";
 import {ShoppingListComponent} from "../shopping-list/ShoppingList";
 import styles from './style.css'
-import {filter} from "../../store/shopping-list.reducer";
+import {filterShoppingLists} from "../shopping-list/shopping-list.actions";
 
 class DashboardComponent extends Component {
     timeout;
@@ -31,10 +31,10 @@ class DashboardComponent extends Component {
     filterItems(event) {
         this.setState({...this.state, filterValue: event.target.value}, ()=> {
             clearTimeout(this.timeout);
-            setTimeout(()=>this.props.filter(this.state.filterValue), 800);
+            setTimeout(()=>this.props.filterShoppingLists(this.state.filterValue), 800);
         })
     }
 
 }
 
-export default connect(state => ({...state}), {filter})(DashboardComponent);
+export default connect(state => ({...state}), {filterShoppingLists})(DashboardComponent);

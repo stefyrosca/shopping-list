@@ -1,12 +1,9 @@
-import {getShoppingLists} from "../mocks/shopping-list.mock";
+import {getShoppingLists} from "../../mocks/shopping-list.mock";
+import {ShoppingListActions} from "./shopping-list.actions";
 
 const actionHandler = {};
 
-const FILTER_SHOPPING_LISTS = 'FILTER_SHOPPING_LISTS ';
-export const filter = (title) => {
-    return {type: FILTER_SHOPPING_LISTS, payload: title}
-};
-actionHandler[FILTER_SHOPPING_LISTS] = (state, action) => {
+actionHandler[ShoppingListActions.FILTER_SHOPPING_LISTS] = (state, action) => {
   const filteredItems = state.items.filter(item => item.title.toLowerCase().indexOf(action.payload.toLowerCase()) !== -1);
   return {...state, filteredItems};
 };
