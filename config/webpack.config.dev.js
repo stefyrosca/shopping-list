@@ -255,7 +255,12 @@ module.exports = {
         // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
         // You can remove this if you don't use Moment.js:
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-        new ExtractTextPlugin('style.css')
+        new ExtractTextPlugin('style.css'),
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('development'),
+            },
+        }),
     ],
     // Some libraries import Node modules but don't use them in the browser.
     // Tell Webpack to provide empty mocks for them so importing them works.
