@@ -39,6 +39,10 @@
     margin: 20px;
 }
 
+.click {
+    cursor: pointer;
+}
+
 .input-field {
     composes: input-field from '../../index.css';
 }

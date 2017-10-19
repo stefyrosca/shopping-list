@@ -4,8 +4,11 @@
     margin-bottom: 20px;
     border: 1px solid transparent;
     border-radius: 4px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
     background-color: blue200;
+    box-shadow: 0px 5px 5px blueGrey100;
+    transition: all ease 0.1s;
+    transition-property: all;
+    transition-duration: 1s;
 }
 
 .panel-disabled,
@@ -19,6 +22,13 @@
     background-color: blue150;
 }
 
+.panel:active {
+    animation-duration: 3s;
+    top: 3px;
+    border: 3px solid blueGrey100;
+    transition-timing-function: linear;
+    box-shadow: 0 3px 0 blueGrey100;
+}
 
 .panel-body {
     padding: 15px;
@@ -46,7 +56,6 @@
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
     font-size: smaller;
-    text-align: end;
 }
 
 .row {
@@ -93,6 +102,10 @@
 
 .align-start {
     text-align: start;
+}
+
+.align-end {
+    text-align: end;
 }
 
 .input-text {

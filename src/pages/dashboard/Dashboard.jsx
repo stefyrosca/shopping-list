@@ -14,8 +14,9 @@ class DashboardComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            filterValue: ''
+            filters: {description: ''}
         };
+        console.log(this.props)
         this.filterItems = this.filterItems.bind(this);
     }
 
@@ -24,21 +25,25 @@ class DashboardComponent extends Component {
             <div>
                 <div className={styles.input}>
                     <label className={styles.label}>Filter shopping lists</label>
-                    <input className={styles['input-field']} value={this.state.filterValue}
+                    <input className={styles['input-field']} value={this.state.filters.description}
                            onChange={this.filterItems}/>
                 </div>
+            </div>
+            <div>
                 <div className={styles.input}>
                     <button className={styles['btn-primary']}
                             onClick={() => this.props.history.push(PATHS.CREATE_LIST)}> Add new shopping list
                     </button>
                 </div>
+
             </div>
             <div className={styles['wrapper-4']}>
                 {this.props.shoppingList.filteredItems.map((id, index) => {
-                    return <div key={index} className={styles.col}>
+                    return <div key={index} >
                         <ShoppingListComponent
+                            onClick={() => this.props.history.push(PATHS.VIEW_LIST.replace(':id', id))}
+                            className={`${styles.col} ${styles.click}`}
                             shoppingList={this.props.shoppingList.items[id]}
-                            onCheckItem={this.props.toggleItemCheck}
                         />
                     </div>
                 })}
@@ -48,11 +53,10 @@ class DashboardComponent extends Component {
 
     filterItems(event) {
         clearTimeout(this.timeout);
-        this.setState({...this.state, filterValue: event.target.value}, () => {
-            this.timeout = setTimeout(() => this.props.filterShoppingLists(this.state.filterValue), 800);
+        this.setState({...this.state, filters: {...this.state.filter, description: event.target.value}}, () => {
+            this.timeout = setTimeout(() => this.props.filterShoppingLists(this.state.filters.description), 800);
         })
     }
-
 }
 
 export default connect(state => ({...state}), {
