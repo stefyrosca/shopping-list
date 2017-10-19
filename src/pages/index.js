@@ -11,9 +11,9 @@ export const PATHS = {
 }
 
 export const routes = [
-    {path: PATHS.HOME, exact: true, component: DashboardComponent, display: 'Dashboard'},
-    {path: PATHS.CREATE_LIST, exact: true, component: CreateShoppingListComponent, display: 'Dashboard'},
-    {path: PATHS.VIEW_LIST, component: EditShoppingListComponent, display: 'Edit shopping list'},
-    {path: PATHS.DASHBOARD, component: DashboardComponent, display: 'Dashboard'},
-    {path: '/*', component: NotFound, display: 'Not found'}
+    {path: PATHS.HOME, exact: true, component: DashboardComponent, display: 'Home', shouldDisplay: true},
+    {path: PATHS.CREATE_LIST, exact: true, component: CreateShoppingListComponent, display: 'Create new list', shouldDisplay: true},
+    {path: PATHS.VIEW_LIST, component: EditShoppingListComponent, display: 'Edit shopping list', shouldDisplay: false},
+    {path: PATHS.DASHBOARD, component: DashboardComponent, display: 'Dashboard', shouldDisplay: true},
+    {path: '/*', component: NotFound, display: 'Not found', shouldDisplay: false}
 ];

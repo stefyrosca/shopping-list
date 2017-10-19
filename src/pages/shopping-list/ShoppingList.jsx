@@ -23,7 +23,7 @@ export class ShoppingListComponent extends Component {
                         </div>
                     })}
                 </div>
-                <div className={styles['panel-footer']}>
+                <div className={`${styles['panel-footer']} ${styles['align-end']}`}>
                     {formatDate(this.props.shoppingList.timestamp)}
                 </div>
             </div>
