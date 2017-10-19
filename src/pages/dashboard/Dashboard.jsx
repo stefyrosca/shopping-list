@@ -7,6 +7,7 @@ import {
     toggleItemCheck
 } from "../shopping-list/shopping-list.actions";
 import {PATHS} from "../index";
+import {availableStatusFilters} from "../../model/shopping-list";
 
 class DashboardComponent extends Component {
     timeout;
@@ -14,31 +15,39 @@ class DashboardComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            filters: {description: ''}
+            filters: {description: '', status: availableStatusFilters.any.key, date: 'any'},
+            sort: {field: 'none', order: 'asc'}
         };
         this.filterItems = this.filterItems.bind(this);
     }
 
     render() {
         return <div>
-            <div>
-                <div className={styles.input}>
-                    <label className={styles.label}>Filter shopping lists</label>
+            <div className={styles.row}>
+                <div className={`${styles.input} ${styles.col}`}>
+                    <label className={styles.label}>Title</label>
                     <input className={styles['input-field']} value={this.state.filters.description}
-                           onChange={this.filterItems}/>
+                           onChange={(event) => this.filterItems('description', event.target.value, 800)}/>
                 </div>
-            </div>
-            <div>
+                <div className={`${styles.input} ${styles.col}`}>
+                    <label className={styles.label}>Status</label>
+                    <select className={styles['input-field']} value={this.state.filters.status}
+                            onChange={(event) => this.filterItems('status', event.target.value)}>
+                        {Object.keys(availableStatusFilters).map(key => {
+                            let filter = availableStatusFilters[key];
+                            return <option key={key} value={filter.key}>{filter.value}</option>
+                        })}
+                    </select>
+                </div>
                 <div className={styles.input}>
                     <button className={styles['btn-primary']}
                             onClick={() => this.props.history.push(PATHS.CREATE_LIST)}> Add new shopping list
                     </button>
                 </div>
-
             </div>
             <div className={styles['wrapper-4']}>
                 {this.props.shoppingList.filteredItems.map((id, index) => {
-                    return <div key={index} >
+                    return <div key={index}>
                         <ShoppingListComponent
                             onClick={() => this.props.history.push(PATHS.VIEW_LIST.replace(':id', id))}
                             className={`${styles.col} ${styles.click}`}
@@ -50,10 +59,10 @@ class DashboardComponent extends Component {
         </div>
     }
 
-    filterItems(event) {
+    filterItems(key, value, delay = 0) {
         clearTimeout(this.timeout);
-        this.setState({...this.state, filters: {...this.state.filter, description: event.target.value}}, () => {
-            this.timeout = setTimeout(() => this.props.filterShoppingLists(this.state.filters.description), 800);
+        this.setState({...this.state, filters: {...this.state.filters, [key]: value}}, () => {
+            this.timeout = setTimeout(() => this.props.filterShoppingLists(this.state.filters), delay);
         })
     }
 }

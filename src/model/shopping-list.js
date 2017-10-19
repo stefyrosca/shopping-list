@@ -1,5 +1,11 @@
 import {nextId} from "../utils/id-generator";
 
+export const availableStatusFilters = {
+    any: {key: 'any', value: 'Any'},
+    completed: {key: 'completed', value: 'Completed'},
+    uncompleted: {key: 'uncompleted', value: 'Uncompleted'},
+};
+
 export class ShoppingList {
     id;
     timestamp;

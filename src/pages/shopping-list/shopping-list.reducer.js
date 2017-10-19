@@ -1,10 +1,26 @@
 import {getShoppingLists} from "../../mocks/shopping-list.mock";
 import {ShoppingListActions} from "./shopping-list.actions";
+import {availableStatusFilters} from "../../model/shopping-list";
 
 const actionHandler = {};
 
 actionHandler[ShoppingListActions.FILTER_SHOPPING_LISTS] = (state, action) => {
-    const filteredItems = Object.keys(state.items).filter(id => state.items[id].title.toLowerCase().indexOf(action.payload.toLowerCase()) !== -1);
+    const filteredItems = Object.keys(state.items).filter(id => {
+        let list = state.items[id];
+        let matching = list.title.toLowerCase().indexOf(action.payload.description.toLowerCase()) !== -1;
+        switch (action.payload.status) {
+            case availableStatusFilters.completed.key:
+                matching = matching && list.checked;
+                break;
+            case availableStatusFilters.uncompleted.key:
+                matching = matching && !list.checked;
+                break;
+            case availableStatusFilters.any.key:
+            default:
+                break;
+        }
+        return matching;
+    });
     return {...state, filteredItems};
 };
 actionHandler[ShoppingListActions.ADD_SHOPPING_LIST] = (state, action) => {

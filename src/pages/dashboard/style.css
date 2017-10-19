@@ -47,8 +47,14 @@
     composes: input-field from '../../index.css';
 }
 
+.select-field {
+    composes: input-field;
+    max-width: 50px;
+}
+
 .input {
     composes: input from '../../index.css';
+    margin: 2em 1em 1em !important;
 }
 
 .label {
@@ -57,3 +63,26 @@
     width: 150px;
 }
 .label:after { content: ": " }
+
+
+.row {
+    display: inline-flex;
+    /*flex: 1;*/
+    /*flex-direction: row;*/
+    margin-bottom: 5px;
+    line-height: 30px;
+    width: 100%;
+    float: left;
+}
+
+.col {
+    flex: 1;
+}
+
+.col-2 {
+    flex: 2;
+}
+
+.col-3 {
+    flex: 3;
+}
