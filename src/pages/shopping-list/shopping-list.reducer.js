@@ -13,7 +13,8 @@ actionHandler[ShoppingListActions.ADD_SHOPPING_LIST] = (state, action) => {
     return {...state, items, filteredItems};
 };
 actionHandler[ShoppingListActions.EDIT_SHOPPING_LIST] = (state, action) => {
-    const items = {...state.items, [action.payload.id]: action.payload};
+    let checked = action.payload.items.find(item => !item.checked) === undefined;
+    const items = {...state.items, [action.payload.id]: {...action.payload, checked, timestamp: new Date()}};
     return {...state, items};
 };
 actionHandler[ShoppingListActions.TOGGLE_ITEM_CHECK] = (state, action) => {

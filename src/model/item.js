@@ -11,6 +11,8 @@ export class Item {
         this.name = name;
         this.quantity = quantity;
         this.id = nextId();
+        // for mock
         this.checked = getRandomInt(1,2) % 2 === 0;
+        // this.checked = false;
     }
 }

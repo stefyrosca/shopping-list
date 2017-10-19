@@ -62,6 +62,8 @@
     display: flex;
     flex: 1;
     flex-direction: row;
+    margin-bottom: 5px;
+    line-height: 30px;
 }
 
 .col {
@@ -109,7 +111,6 @@
 }
 
 .input-text {
-    composes: input;
     color: blueGrey800;
     background-color: blueGrey50;
     padding: 5px;
@@ -117,7 +118,6 @@
 }
 
 .input-number {
-    /*composes: input-field from '../../index.css';*/
     composes: input-text;
     flex: 1;
 }

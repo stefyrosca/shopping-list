@@ -1,4 +1,27 @@
+@value blueGrey800, blueGrey50 from "../../colors.css";
+
 .wrapper {
     max-width: 50%;
     margin: 20px auto auto;
+}
+
+.btn {
+    composes: btn from '../../index.css';
+}
+
+.input-text {
+    color: blueGrey800;
+    background-color: blueGrey50;
+    padding: 5px;
+    flex: 3;
+}
+
+.input-number {
+    composes: input-text;
+    flex: 1;
+}
+
+.label {
+    composes: label from '../shopping-list/style.css';
+    font-size: medium;
 }

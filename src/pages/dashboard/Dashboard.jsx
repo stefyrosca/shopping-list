@@ -16,7 +16,6 @@ class DashboardComponent extends Component {
         this.state = {
             filters: {description: ''}
         };
-        console.log(this.props)
         this.filterItems = this.filterItems.bind(this);
     }
 
