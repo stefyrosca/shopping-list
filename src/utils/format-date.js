@@ -4,5 +4,5 @@ export function formatDate(date) {
     let year = date.getFullYear();
     let hour = date.getHours();
     let minutes = date.getMinutes();
-    return `${day}.${monthIndex}.${year} ${hour}:${minutes}`
+    return `${day}.${monthIndex}.${year} ${hour < 10 ? `0${hour}` : hour}:${minutes < 10 ? `0${minutes}` : minutes}`
 }
