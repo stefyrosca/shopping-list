@@ -7,7 +7,7 @@ const actionHandler = {};
 actionHandler[ShoppingListActions.FILTER_SHOPPING_LISTS] = (state, action) => {
     const filteredItems = Object.keys(state.items).filter(id => {
         let list = state.items[id];
-        let matching = list.title.toLowerCase().indexOf(action.payload.description.toLowerCase()) !== -1;
+        let matching = list.title.toLowerCase().indexOf(action.payload.title.toLowerCase()) !== -1;
         switch (action.payload.status) {
             case availableStatusFilters.completed.key:
                 matching = matching && list.checked;

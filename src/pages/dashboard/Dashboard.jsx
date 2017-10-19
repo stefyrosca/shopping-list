@@ -15,7 +15,7 @@ class DashboardComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            filters: {description: '', status: availableStatusFilters.any.key, date: 'any'},
+            filters: {title: '', status: availableStatusFilters.any.key, date: 'any'},
             sort: {field: 'none', order: 'asc'}
         };
         this.filterItems = this.filterItems.bind(this);
@@ -26,8 +26,8 @@ class DashboardComponent extends Component {
             <div className={styles.row}>
                 <div className={`${styles.input} ${styles.col}`}>
                     <label className={styles.label}>Title</label>
-                    <input className={styles['input-field']} value={this.state.filters.description}
-                           onChange={(event) => this.filterItems('description', event.target.value, 800)}/>
+                    <input className={styles['input-field']} value={this.state.filters.title}
+                           onChange={(event) => this.filterItems('title', event.target.value, 800)}/>
                 </div>
                 <div className={`${styles.input} ${styles.col}`}>
                     <label className={styles.label}>Status</label>

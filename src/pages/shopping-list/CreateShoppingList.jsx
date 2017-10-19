@@ -48,8 +48,8 @@ class CreateShoppingListComponent extends Component {
                     <div className={styles['col-3']}>
                         <span className={styles.label}>Description</span>
                         <input className={styles['input-text']}
-                               value={this.state.newItem.description}
-                               onChange={(event) => this.updateValue('description', event.target.value)}/>
+                               value={this.state.newItem.title}
+                               onChange={(event) => this.updateValue('title', event.target.value)}/>
                     </div>
                     <div className={styles['col']}>
                         <span className={styles.label}>Quantity</span>
@@ -84,7 +84,7 @@ class CreateShoppingListComponent extends Component {
 
 
     addNewItem() {
-        let item = new Item(this.state.newItem.description, this.state.newItem.quantity);
+        let item = new Item(this.state.newItem.title, this.state.newItem.quantity);
         this.setState({...this.state, items: [...this.state.items, item], newItem: {quantity: 1, description: ''}});
     }
 
