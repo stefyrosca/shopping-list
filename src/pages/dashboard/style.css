@@ -59,19 +59,6 @@
     cursor: pointer;
 }
 
-.input-field {
-    composes: input-field from '../../index.css';
-}
-
-.select-field {
-    composes: input-field;
-    max-width: 50px;
-}
-
-.input {
-    composes: input from '../../index.css';
-    margin: 2em 1em 1em !important;
-}
 
 .label {
     color: deepOrange500;
