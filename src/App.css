@@ -1,74 +1,81 @@
+@value AppBarHeight: 70px;
 
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 80px;
+    text-align: center;
+    margin-top: AppBarHeight;
 }
 
 .App-header {
-  float: left;
-  height: 50px;
-  padding: 5px 15px;
-  font-size: 1.5em;
-  line-height: 20px;
-  color: white;
+    float: left;
+    height: 50px;
+    padding: 5px 15px;
+    font-size: 1.5em;
+    line-height: 20px;
+    color: white;
 }
+
 .navbar-header {
-  float: left;
+    float: left;
 }
 
 .App-intro {
-  font-size: large;
+    font-size: large;
 }
 
 .navbar {
-  position: relative;
-  min-height: 70px;
-  margin-bottom: 20px;
+    position: fixed;
+    top: 0;
+    left: auto;
+    right: 0;
+    height: AppBarHeight;
+    margin-bottom: 20px;
+    width: 100%;
+    z-index: 200;
 }
 
 .navbar-inverse {
-  background-color: #222;
-  border-color: #080808;
+    background-color: #222;
+    border-color: #080808;
 }
 
 .navbar-header {
-  float: left;
+    float: left;
 }
 
 .nav {
-  padding-left: 0;
-  margin-bottom: 0;
-  list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
 }
+
 .nav > li {
-  position: relative;
-  display: block;
+    position: relative;
+    display: block;
 }
+
 .nav > li > a {
-  position: relative;
-  display: block;
-  padding: 10px 15px;
+    position: relative;
+    display: block;
+    padding: 10px 15px;
 }
 
 .navbar-nav {
-  float: left;
-  display: inline-flex;
-  list-style: none;
+    float: left;
+    display: inline-flex;
+    list-style: none;
 }
+
 .navbar-nav > li > a {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  line-height: 20px;
-  color: white;
-  text-decoration: none !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 20px;
+    color: white;
+    text-decoration: none !important;
 }
 
 .container-fluid {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
 }
