@@ -19,6 +19,13 @@ actionHandler[ShoppingListActions.FILTER_SHOPPING_LISTS] = (state, action) => {
             default:
                 break;
         }
+        if (!matching)
+            return matching;
+        let foundItems = list.items.filter(item => action.payload.items.selectedItems.find(sItem => item.name.toLowerCase().indexOf(sItem.toLowerCase()) !== -1));
+        if (foundItems.length >= action.payload.items.selectedItems.length)
+            matching = matching && true;
+        else
+            matching = false;
         return matching;
     });
     return {...state, filteredItems};
@@ -57,7 +64,7 @@ const initialState = () => {
     initialItemsList.forEach(item => {
         initialItems[item.id] = item;
         filteredItems.push(item.id);
-    })
+    });
     return {
         items: initialItems,
         filteredItems: filteredItems

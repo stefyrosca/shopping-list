@@ -54,7 +54,7 @@ class EditShoppingListComponent extends Component {
                                 /> : item.quantity}
                             </div>
                             <div className={styles['col']}>
-                                <button className={localStyles.btn} onClick={() => this.removeItem(item.id)}>X</button>
+                                <button className={localStyles.btn} onClick={() => this.removeItem(item.id)}><span className={styles.close}>&times;</span></button>
                             </div>
                         </div>
                     })}

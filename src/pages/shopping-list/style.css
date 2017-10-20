@@ -30,6 +30,19 @@
     box-shadow: 0 3px 0 blueGrey100;
 }
 
+
+.close {
+    float: right;
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .6;
+}
+
+
 .panel-body {
     padding: 15px;
 }
