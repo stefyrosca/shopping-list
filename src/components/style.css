@@ -1,4 +1,5 @@
 @value deepOrange500 from "../colors.css";
+@value filterWidth from "../index.css";
 
 .filter-container {
     height: 100%; /* 100% Full-height */
@@ -14,19 +15,28 @@
 }
 
 .filter-container[data-open=true] {
-    width: 250px;
+    width: filterWidth;
 }
 
+.toggle-button {
+    float: left;
+    margin-left: 10px;
+}
 
 .input-field {
     composes: input-field from '../index.css';
+    max-width: filterWidth;
+
 }
 
 .select-field {
     composes: input-field;
-    max-width: 50px;
+    max-width: filterWidth;
 }
-
+.badge {
+    composes: badge from '../index.css';
+    margin: 3px;
+}
 
 .label {
     color: deepOrange500;

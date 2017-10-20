@@ -4,6 +4,7 @@ import {availableStatusFilters} from "../model/shopping-list";
 
 export class FilterShoppingListsComponent extends Component {
     timeout;
+    container;
 
     constructor(props) {
         super(props);
@@ -13,15 +14,19 @@ export class FilterShoppingListsComponent extends Component {
             status: availableStatusFilters.any.key,
             date: 'any',
             items: {newItem: '', selectedItems: []}
-        }
+        };
+        this.handleClick = this.handleClick.bind(this);
     }
 
     render() {
-        return <div>
-            <div onClick={() => {
-                this.setState({...this.state, open: !this.state.open})
-            }}> Click me
-            </div>
+        return <div ref={(event) => this.container = event}>
+            {!this.state.open && <div className={styles['toggle-button']}>
+                Show filters
+                <button onClick={() => {
+                    this.setState({...this.state, open: !this.state.open})
+                }}><span>&rArr;</span></button>
+                </div>
+            }
             <div data-open={this.state.open} className={styles['filter-container']}>
                 <div className={`${styles.input} ${styles.col}`}>
                     <label className={styles.label}>Title</label>
@@ -61,6 +66,19 @@ export class FilterShoppingListsComponent extends Component {
                 </div>
             </div>
         </div>
+    }
+
+    handleClick(event) {
+        if (!this.container.contains(event.target) && this.state.open)
+            this.setState({...this.state, open: false});
+    }
+
+    componentDidMount() {
+        document.addEventListener('click', this.handleClick, true);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('click', this.handleClick, true);
     }
 
     removeFilterItem(item) {

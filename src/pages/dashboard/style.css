@@ -9,10 +9,7 @@
 .btn-primary {
     composes: btn-primary from '../../index.css';
 }
-.badge {
-    composes: badge from '../../index.css';
-    margin: 3px;
-}
+
 
 .close {
     float: right;

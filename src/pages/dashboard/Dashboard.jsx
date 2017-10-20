@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
-import {connect} from "react-redux";
-import {ShoppingListComponent} from "../shopping-list/ShoppingList";
+import React, { Component } from 'react'
+import { connect } from "react-redux";
+import { ShoppingListComponent } from "../shopping-list/ShoppingList";
 import styles from './style.css'
 import {
     addShoppingList,
@@ -8,24 +8,24 @@ import {
     filterShoppingLists,
     toggleItemCheck
 } from "../shopping-list/shopping-list.actions";
-import {PATHS} from "../index";
-import {FilterShoppingListsComponent} from "../../components/FilterShoppingLists";
+import { PATHS } from "../index";
+import { FilterShoppingListsComponent } from "../../components/FilterShoppingLists";
 
 class DashboardComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            sort: {field: 'none', order: 'asc'}
+            sort: { field: 'none', order: 'asc' }
         };
     }
 
     render() {
         return <div>
-            <FilterShoppingListsComponent filterShoppingLists={this.props.filterShoppingLists}/>
+            <FilterShoppingListsComponent filterShoppingLists={this.props.filterShoppingLists} />
             <div className={styles.row}>
                 <div className={styles.col}>
                     <button className={styles['btn-primary']}
-                            onClick={() => this.props.history.push(PATHS.CREATE_LIST)}> Add new shopping list
+                        onClick={() => this.props.history.push(PATHS.CREATE_LIST)}> Add new shopping list
                     </button>
                 </div>
             </div>
@@ -45,7 +45,7 @@ class DashboardComponent extends Component {
 
 }
 
-export default connect(state => ({...state}), {
+export default connect(state => ({ ...state }), {
     filterShoppingLists,
     addShoppingList,
     editShoppingList,

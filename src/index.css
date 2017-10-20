@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+@value filterWidth: 250px;
 @value grey50, blueGrey800, blueGrey50, deepOrange500 from "./colors.css";
 
 html {
@@ -48,7 +49,7 @@ ul {
 
 .input-field {
   padding: 0.2em 0.25em;
-  font-size: 1.55em;
+  font-size: 1.1em;
   color: blueGrey800;
   background-color: blueGrey50;
 }
