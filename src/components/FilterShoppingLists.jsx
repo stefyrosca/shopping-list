@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-import styles from '../pages/dashboard/style.css'
-import localStyles from './style.css'
+import styles from './style.css'
 import {availableStatusFilters} from "../model/shopping-list";
 
 export class FilterShoppingListsComponent extends Component {
+    timeout;
 
     constructor(props) {
         super(props);
@@ -18,8 +18,11 @@ export class FilterShoppingListsComponent extends Component {
 
     render() {
         return <div>
-            <div onClick={()=>{this.setState({...this.state, open: !this.state.open})}}> Click me </div>
-            <div data-open={this.state.open} className={localStyles['filter-container']}>
+            <div onClick={() => {
+                this.setState({...this.state, open: !this.state.open})
+            }}> Click me
+            </div>
+            <div data-open={this.state.open} className={styles['filter-container']}>
                 <div className={`${styles.input} ${styles.col}`}>
                     <label className={styles.label}>Title</label>
                     <input className={styles['input-field']} value={this.state.title}

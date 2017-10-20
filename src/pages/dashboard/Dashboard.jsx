@@ -12,8 +12,6 @@ import {PATHS} from "../index";
 import {FilterShoppingListsComponent} from "../../components/FilterShoppingLists";
 
 class DashboardComponent extends Component {
-    timeout;
-
     constructor(props) {
         super(props);
         this.state = {
@@ -25,7 +23,7 @@ class DashboardComponent extends Component {
         return <div>
             <FilterShoppingListsComponent filterShoppingLists={this.props.filterShoppingLists}/>
             <div className={styles.row}>
-                <div className={styles.input}>
+                <div className={styles.col}>
                     <button className={styles['btn-primary']}
                             onClick={() => this.props.history.push(PATHS.CREATE_LIST)}> Add new shopping list
                     </button>

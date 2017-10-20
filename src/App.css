@@ -3,6 +3,7 @@
 .App {
     text-align: center;
     margin-top: AppBarHeight;
+    padding-top: 20px;
 }
 
 .App-header {
@@ -28,7 +29,6 @@
     left: auto;
     right: 0;
     height: AppBarHeight;
-    margin-bottom: 20px;
     width: 100%;
     z-index: 200;
 }
