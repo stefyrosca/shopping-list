@@ -54,7 +54,8 @@ class EditShoppingListComponent extends Component {
                                 /> : item.quantity}
                             </div>
                             <div className={styles['col']}>
-                                <button className={localStyles.btn} onClick={() => this.removeItem(item.id)}><span className={styles.close}>&times;</span></button>
+                                <button className={localStyles.btn} onClick={() => this.removeItem(item.id)}><span
+                                    className={styles.close}>&times;</span></button>
                             </div>
                         </div>
                     })}
@@ -64,8 +65,8 @@ class EditShoppingListComponent extends Component {
                             <span className={localStyles.label}>Description</span>
                             <br/>
                             <input className={styles['input-text']}
-                                   value={this.state.newItem.title}
-                                   onChange={(event) => this.updateNewItem('title', event.target.value)}/>
+                                   value={this.state.newItem.description}
+                                   onChange={(event) => this.updateNewItem('description', event.target.value)}/>
                         </div>
                         <div className={styles['col']}>
                             <span className={localStyles.label}>Quantity</span>
@@ -82,16 +83,24 @@ class EditShoppingListComponent extends Component {
                 </div>
                 <div>
                     {this.state.editView ? <div>
-                            <button className={styles['btn-primary-left']} onClick={this.reset}>
-                                Reset
-                            </button>
-                            <button className={styles['btn-primary-right']} onClick={this.addNewItem}>
-                                Add
-                            </button>
-                            <button className={styles['btn-primary-right']} onClick={this.onSave}>
-                                Save
-                            </button>
+                            <div>
+                                <button className={styles['btn-primary-left']} onClick={()=>this.reset(true)}>
+                                    Reset
+                                </button>
+                                <button className={styles['btn-primary-right']} onClick={this.addNewItem}>
+                                    Add
+                                </button>
+                                <button className={styles['btn-primary-right']} onClick={this.onSave}>
+                                    Save
+                                </button>
+                            </div>
+                            <div>
+                                <button className={styles['btn-primary-right']} onClick={()=>this.reset(false)}>
+                                    Cancel
+                                </button>
+                            </div>
                         </div> :
+
                         <button className={styles['btn-primary-right']}
                                 onClick={() => this.reset(true)}>
                             Edit
@@ -108,7 +117,7 @@ class EditShoppingListComponent extends Component {
     }
 
     addNewItem() {
-        let item = new Item(this.state.newItem.title, this.state.newItem.quantity);
+        let item = new Item(this.state.newItem.description, this.state.newItem.quantity);
         this.setState({
             ...this.state,
             shoppingList: {...this.state.shoppingList, items: [...this.state.shoppingList.items, item]},
@@ -160,6 +169,7 @@ class EditShoppingListComponent extends Component {
         this.props.editShoppingList(this.state.shoppingList);
         this.reset();
     }
+
 }
 
 export default connect(state => ({...state}), {editShoppingList, toggleItemCheck})(EditShoppingListComponent);
