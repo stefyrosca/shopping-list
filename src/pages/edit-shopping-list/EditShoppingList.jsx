@@ -19,6 +19,7 @@ class EditShoppingListComponent extends Component {
         this.reset = this.reset.bind(this);
         this.addNewItem = this.addNewItem.bind(this);
         this.onSave = this.onSave.bind(this);
+        this.goBack = this.goBack.bind(this);
     }
 
     render() {
@@ -84,7 +85,7 @@ class EditShoppingListComponent extends Component {
                 <div>
                     {this.state.editView ? <div>
                             <div>
-                                <button className={styles['btn-primary-left']} onClick={()=>this.reset(true)}>
+                                <button className={styles['btn-primary-left']} onClick={() => this.reset(true)}>
                                     Reset
                                 </button>
                                 <button className={styles['btn-primary-right']} onClick={this.addNewItem}>
@@ -95,20 +96,29 @@ class EditShoppingListComponent extends Component {
                                 </button>
                             </div>
                             <div>
-                                <button className={styles['btn-primary-right']} onClick={()=>this.reset(false)}>
+                                <button className={styles['btn-primary-right']} onClick={() => this.reset(false)}>
                                     Cancel
                                 </button>
                             </div>
                         </div> :
-
-                        <button className={styles['btn-primary-right']}
-                                onClick={() => this.reset(true)}>
-                            Edit
-                        </button>
+                        <div>
+                            <button className={styles['btn-primary-left']}
+                                    onClick={this.goBack}>
+                                Back to home page
+                            </button>
+                            <button className={styles['btn-primary-right']}
+                                    onClick={() => this.reset(true)}>
+                                Edit
+                            </button>
+                        </div>
                     }
                 </div>
             </div>
         </div>
+    }
+
+    goBack() {
+        this.props.history.push(PATHS.HOME);
     }
 
     updateNewItem(key, value) {
