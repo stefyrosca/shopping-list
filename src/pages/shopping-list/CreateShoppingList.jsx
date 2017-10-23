@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
 import styles from './style.css'
-import {Item} from "../../model/item";
+import {Item, ItemCategory} from "../../model/item";
 import {ShoppingList} from "../../model/shopping-list";
 import {addShoppingList} from "./shopping-list.actions";
 import {PATHS} from "../index";
@@ -10,7 +10,7 @@ class CreateShoppingListComponent extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {items: [], title: '', newItem: {description: '', quantity: 1}};
+        this.state = {items: [], title: '', newItem: {description: '', quantity: 1, category: ItemCategory.other}};
 
         this.reset = this.reset.bind(this);
         this.addNewItem = this.addNewItem.bind(this);
@@ -53,7 +53,7 @@ class CreateShoppingListComponent extends Component {
             </div>
             <div className={styles['align-start']}>
                 <div className={styles.row}>
-                    <div className={styles['col-3']}>
+                    <div className={styles['col-2']}>
                         <span className={styles.label}>Description</span>
                         <input className={styles['input-text']}
                                value={this.state.newItem.description}
@@ -64,6 +64,15 @@ class CreateShoppingListComponent extends Component {
                         <input className={styles['input-number']}
                                type={"number"} value={this.state.newItem.quantity}
                                onChange={(event) => this.updateValue('quantity', event.target.value)}/>
+                    </div>
+                    <div className={styles['col-2']}>
+                        <span className={styles.label}>Category</span>
+                        <select className={styles['input-field']} value={this.state.newItem.category}
+                                onChange={(event) => this.updateValue('category', event.target.value)}>
+                            {Object.keys(ItemCategory).map(key => {
+                                return <option key={key} value={key}>{ItemCategory[key]}</option>
+                            })}
+                        </select>
                     </div>
                 </div>
             </div>
@@ -92,9 +101,9 @@ class CreateShoppingListComponent extends Component {
 
 
     addNewItem() {
-        let item = new Item(this.state.newItem.description, this.state.newItem.quantity);
+        let item = new Item(this.state.newItem.description, this.state.newItem.quantity, this.state.newItem.category);
         let categoryItems = this.state.items[item.category] ? [...this.state.items[item.category], item] : [item];
-        this.setState({...this.state, items: {...this.state.items, [item.category]: categoryItems}, newItem: {quantity: 1, description: ''}});
+        this.setState({...this.state, items: {...this.state.items, [item.category]: categoryItems}, newItem: {quantity: 1, description: '', category: ItemCategory.other}});
     }
 
     onSave() {

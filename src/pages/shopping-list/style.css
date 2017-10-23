@@ -107,21 +107,24 @@
 
 .col {
     flex: 1;
+    margin: auto;
 }
 
 .col-2 {
     flex: 2;
+    margin: auto;
 }
 
 .col-3 {
     flex: 3;
+    margin: auto;
 }
 
 .list-group {
     padding-left: 0;
     margin: auto;
     padding-top: 20px;
-    max-width: 700px;
+    width: 90%;
 }
 .list-group-item {
     position: relative;
