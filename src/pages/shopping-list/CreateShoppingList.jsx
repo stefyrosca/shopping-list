@@ -28,14 +28,22 @@ class CreateShoppingListComponent extends Component {
             </div>
             <div>
                 <ul>
-                    {this.state.items.map((item, index) => {
-                        return <li key={index} className={styles['list-group-item-info']}>
-                            <div className={styles.row}>
-                                <div className={`${styles['col-3']} ${styles['align-start']} `}>{item.name}</div>
-                                <div className={styles['col']}>{item.quantity}</div>
-                            </div>
-                        </li>
-                    })}
+                    {Object.keys(this.state.items)
+                        .map(category => this.state.items[category])
+                        .map((items, index) => {
+                            return <li key={index} className={styles['list-group-item-info']}>
+                                <div>
+                                    {items[0].category}
+                                </div>
+                                {items.map((item, index) => {
+                                    return <div className={styles.row} key={index}>
+                                        <div
+                                            className={`${styles['col-3']} ${styles['align-start']} `}>{item.name}</div>
+                                        <div className={styles['col']}>{item.quantity}</div>
+                                    </div>
+                                })}
+                            </li>
+                        })}
                     {this.state.items.length === 0 &&
                     <li className={styles['list-group-item-info']}>
                         <span>No products added</span>
@@ -48,8 +56,8 @@ class CreateShoppingListComponent extends Component {
                     <div className={styles['col-3']}>
                         <span className={styles.label}>Description</span>
                         <input className={styles['input-text']}
-                               value={this.state.newItem.title}
-                               onChange={(event) => this.updateValue('title', event.target.value)}/>
+                               value={this.state.newItem.description}
+                               onChange={(event) => this.updateValue('description', event.target.value)}/>
                     </div>
                     <div className={styles['col']}>
                         <span className={styles.label}>Quantity</span>
@@ -84,8 +92,9 @@ class CreateShoppingListComponent extends Component {
 
 
     addNewItem() {
-        let item = new Item(this.state.newItem.title, this.state.newItem.quantity);
-        this.setState({...this.state, items: [...this.state.items, item], newItem: {quantity: 1, description: ''}});
+        let item = new Item(this.state.newItem.description, this.state.newItem.quantity);
+        let categoryItems = this.state.items[item.category] ? [...this.state.items[item.category], item] : [item];
+        this.setState({...this.state, items: {...this.state.items, [item.category]: categoryItems}, newItem: {quantity: 1, description: ''}});
     }
 
     onSave() {

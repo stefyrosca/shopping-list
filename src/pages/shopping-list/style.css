@@ -1,4 +1,29 @@
-@value deepOrange500, blueGrey800, blueGrey50, blue100, blue200, blue400, blueGrey100, blueGrey500, blue150, blue50 from "../../colors.css";
+@value blueGrey800, grey50, deepOrange500, blueGrey50, blue100, blue200, blue400, blueGrey100, blueGrey500, blue150 from "../../colors.css";
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.btn-primary {
+    composes: btn;
+    background-color: deepOrange500;
+    color: grey50;
+    margin-top: 20px;
+}
 
 .panel {
     margin-bottom: 20px;
@@ -133,11 +158,6 @@
 .input-number {
     composes: input-text;
     flex: 1;
-}
-
-.btn-primary {
-    composes: btn-primary from '../../index.css';
-    margin-top: 20px;
 }
 
 .float-right {

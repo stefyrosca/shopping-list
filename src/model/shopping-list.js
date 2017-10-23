@@ -19,7 +19,11 @@ export class ShoppingList {
         this.items = items;
         this.id = nextId();
         // while using mocks
-        this.checked = this.items.filter(item => !item.checked).length === 0;
+        this.checked = ShoppingList.isListChecked(this.items);
         // this.checked = false;
+    }
+
+    static isListChecked(items) {
+        return Object.keys(items).map(category => items[category]).flatMap(item => item).find(item => !item.checked) === undefined;
     }
 }

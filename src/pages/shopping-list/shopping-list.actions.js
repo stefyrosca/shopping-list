@@ -7,5 +7,11 @@ export const ShoppingListActions = {
 
 export const filterShoppingLists = (filters) => ({type: ShoppingListActions.FILTER_SHOPPING_LISTS, payload: filters});
 export const addShoppingList = (shoppingList) => ({type: ShoppingListActions.ADD_SHOPPING_LIST, payload: shoppingList});
-export const editShoppingList = (shoppingList) => ({type: ShoppingListActions.EDIT_SHOPPING_LIST, payload: shoppingList});
-export const toggleItemCheck = (shoppingListId, itemId, checked) => ({type: ShoppingListActions.TOGGLE_ITEM_CHECK, payload: {shoppingListId, itemId, checked}});
+export const editShoppingList = (shoppingList) => ({
+    type: ShoppingListActions.EDIT_SHOPPING_LIST,
+    payload: shoppingList
+});
+export const toggleItemCheck = (shoppingListId, itemId, category, checked) => ({
+    type: ShoppingListActions.TOGGLE_ITEM_CHECK,
+    payload: {shoppingListId, itemId, category, checked}
+});

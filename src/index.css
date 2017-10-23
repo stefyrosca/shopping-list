@@ -1,71 +1,68 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
 @value filterWidth: 250px;
 @value grey50, blueGrey800, blueGrey50, deepOrange500 from "./colors.css";
 
 html {
-  font-family: 'Roboto', sans-serif;
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  background-color: grey50;
+    font-family: 'Roboto', sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    background-color: grey50;
 }
 
 body {
-  margin: 0;
+    margin: 0;
 }
 
 ul {
-  padding: 0;
+    padding: 0;
 }
 
 .btn {
-  display: inline-block;
-  padding: 6px 12px;
-  margin-bottom: 0;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 1.42857143;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  touch-action: manipulation;
-  cursor: pointer;
-  user-select: none;
-  background-image: none;
-  border: 1px solid transparent;
-  border-radius: 4px;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
 }
 
 .btn-primary {
-  composes: btn;
-  background-color: deepOrange500;
-  color: grey50;
+    composes: btn;
+    background-color: deepOrange500;
+    color: grey50;
 }
 
-
 .input {
-  margin: 4em 1em 1em;
-  flex: 1;
+    margin: 4em 1em 1em;
+    flex: 1;
 }
 
 .input-field {
-  padding: 0.2em 0.25em;
-  font-size: 1.1em;
-  color: blueGrey800;
-  background-color: blueGrey50;
+    padding: 0.2em 0.25em;
+    font-size: 1.1em;
+    color: blueGrey800;
+    background-color: blueGrey50;
 }
 
-
 .badge {
-  display: inline-block;
-  min-width: 10px;
-  padding: 3px 7px;
-  font-size: 12px;
-  font-weight: bold;
-  line-height: 1;
-  color: #fff;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  background-color: #777;
-  border-radius: 10px;
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #777;
+    border-radius: 10px;
 }

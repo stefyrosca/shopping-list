@@ -1,6 +1,6 @@
 import {getShoppingLists} from "../../mocks/shopping-list.mock";
 import {ShoppingListActions} from "./shopping-list.actions";
-import {availableStatusFilters} from "../../model/shopping-list";
+import {availableStatusFilters, ShoppingList} from "../../model/shopping-list";
 
 const actionHandler = {};
 
@@ -36,15 +36,15 @@ actionHandler[ShoppingListActions.ADD_SHOPPING_LIST] = (state, action) => {
     return {...state, items, filteredItems};
 };
 actionHandler[ShoppingListActions.EDIT_SHOPPING_LIST] = (state, action) => {
-    let checked = action.payload.items.find(item => !item.checked) === undefined;
+    let checked = ShoppingList.isListChecked(action.payload.items);
     const items = {...state.items, [action.payload.id]: {...action.payload, checked, timestamp: new Date()}};
     return {...state, items};
 };
 actionHandler[ShoppingListActions.TOGGLE_ITEM_CHECK] = (state, action) => {
-    let {shoppingListId, itemId, checked} = action.payload;
+    let {shoppingListId, itemId, category, checked} = action.payload;
     let shoppingList = {...state.items[shoppingListId]};
     let done = checked;
-    shoppingList.items = shoppingList.items.map(item => {
+    shoppingList.items[category] = shoppingList.items[category].map(item => {
         if (item.id === itemId)
             return {...item, checked};
         if (item.checked === false) {

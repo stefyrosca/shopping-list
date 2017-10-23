@@ -35,31 +35,43 @@ class EditShoppingListComponent extends Component {
                     <h3 className={styles['panel-title']}>{shoppingList.title}</h3>
                 </div>
                 <div className={styles["panel-body"]}>
-                    {shoppingList.items.map((item, index) => {
-                        return <div key={index} className={styles.row}>
-                            <div className={styles.col}>
-                                <input
-                                    onChange={(event) => this.toggleItemCheck(shoppingList.id, item.id, event.target.checked)}
-                                    checked={item.checked} type={"checkbox"}/>
+                    {Object.keys(shoppingList.items)
+                        .map(category => shoppingList.items[category])
+                        .map((items, index) => {
+                            return <div key={index}>
+                                <div>
+                                    {items[0].category}
+                                </div>
+                                {items.map((item, index) => {
+                                    return <div className={styles.row} key={index}>
+                                        <div className={styles.col}>
+                                            <input
+                                                onChange={(event) => this.toggleItemCheck(shoppingList.id, item.id, item.category, event.target.checked)}
+                                                checked={item.checked} type={"checkbox"}/>
+                                        </div>
+                                        <div className={`${styles['col-3']} ${styles['align-start']}`}>
+                                            {this.state.editView ?
+                                                <input className={localStyles['input-text']} value={item.name}
+                                                       onChange={(event) => this.updateItem(item.id, 'name', event.target.value)}
+                                                /> : item.name}
+                                        </div>
+                                        <div className={styles['col']}>
+                                            {this.state.editView ?
+                                                <input className={localStyles['input-number']} type={'number'}
+                                                       value={item.quantity}
+                                                       onChange={(event) => this.updateItem(item.id, 'quantity', event.target.value)}
+                                                /> : item.quantity}
+                                        </div>
+                                        <div className={styles['col']}>
+                                            <button className={localStyles.btn}
+                                                    onClick={() => this.removeItem(item.id)}><span
+                                                className={styles.close}>&times;</span></button>
+                                        </div>
+                                    </div>
+                                })}
+
                             </div>
-                            <div className={`${styles['col-3']} ${styles['align-start']}`}>
-                                {this.state.editView ?
-                                    <input className={localStyles['input-text']} value={item.name}
-                                           onChange={(event) => this.updateItem(item.id, 'name', event.target.value)}
-                                    /> : item.name}
-                            </div>
-                            <div className={styles['col']}>
-                                {this.state.editView ? <input className={localStyles['input-number']} type={'number'}
-                                                              value={item.quantity}
-                                                              onChange={(event) => this.updateItem(item.id, 'quantity', event.target.value)}
-                                /> : item.quantity}
-                            </div>
-                            <div className={styles['col']}>
-                                <button className={localStyles.btn} onClick={() => this.removeItem(item.id)}><span
-                                    className={styles.close}>&times;</span></button>
-                            </div>
-                        </div>
-                    })}
+                        })}
                     {this.state.editView && <div className={`${styles['row']} ${styles['align-start']}`}>
                         <div className={styles['col']}/>
                         <div className={styles['col-3']}>
@@ -128,9 +140,13 @@ class EditShoppingListComponent extends Component {
 
     addNewItem() {
         let item = new Item(this.state.newItem.description, this.state.newItem.quantity);
+        let categoryItems = this.state.shoppingList.items[item.category] ? [...this.state.shoppingList.items[item.category], item] : [item];
         this.setState({
             ...this.state,
-            shoppingList: {...this.state.shoppingList, items: [...this.state.shoppingList.items, item]},
+            shoppingList: {
+                ...this.state.shoppingList,
+                items: {...this.state.shoppingList.items, [item.category]: categoryItems}
+            },
             newItem: {quantity: 1, description: ''}
         });
     }
@@ -154,16 +170,22 @@ class EditShoppingListComponent extends Component {
             this.props.editShoppingList(newShoppingList)
     }
 
-    toggleItemCheck(shoppingListId, itemId, checked) {
+    toggleItemCheck(shoppingListId, itemId, category, checked) {
         if (this.state.editView) {
-            let updatedItems = this.state.shoppingList.items.map(item => {
+            let updatedItems = this.state.shoppingList.items[category].map(item => {
                 if (item.id === itemId)
                     return {...item, checked};
                 return item;
             });
-            this.setState({...this.state, shoppingList: {...this.state.shoppingList, items: updatedItems}});
+            this.setState({
+                ...this.state,
+                shoppingList: {
+                    ...this.state.shoppingList,
+                    items: {...this.state.shoppingList.items, [category]: updatedItems}
+                }
+            });
         } else {
-            this.props.toggleItemCheck(shoppingListId, itemId, checked);
+            this.props.toggleItemCheck(shoppingListId, itemId, category, checked);
         }
     }
 
