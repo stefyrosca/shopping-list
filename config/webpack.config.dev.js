@@ -101,7 +101,9 @@ module.exports = {
             // please link the files into your node_modules/ and let module-resolution kick in.
             // Make sure your source files are compiled, as they will not be processed in any way.
             new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
-            new ExtractTextPlugin("styles.css")
+            new ExtractTextPlugin({
+                filename: "styles.css", ignoreOrder: true
+            })
         ],
     },
     module: {
@@ -167,38 +169,39 @@ module.exports = {
                         use: ExtractTextPlugin.extract({
                             fallback: 'style-loader',
                             use: [
-                            {
-                                loader: require.resolve('css-loader'),
-                                options: {
-                                    importLoaders: 1,
-                                    modules: true,
-                                    localIdentName:'[name]__[local]___[hash:base64:5]'
-                                },
-                            },
-                            {
-                                loader: require.resolve('postcss-loader'),
-                                options: {
-                                    // Necessary for external CSS imports to work
-                                    // https://github.com/facebookincubator/create-react-app/issues/2677
-                                    ident: 'postcss',
-                                    config: {
-                                        path: './postcss.config.js'
+                                {
+                                    loader: require.resolve('css-loader'),
+                                    options: {
+                                        importLoaders: 1,
+                                        modules: true,
+                                        localIdentName: '[name]__[local]___[hash:base64:5]'
                                     },
-                                    plugins: () => [
-                                        require('postcss-flexbugs-fixes'),
-                                        autoprefixer({
-                                            browsers: [
-                                                '>1%',
-                                                'last 4 versions',
-                                                'Firefox ESR',
-                                                'not ie < 9', // React doesn't support IE8 anyway
-                                            ],
-                                            flexbox: 'no-2009',
-                                        }),
-                                    ],
                                 },
-                            },
-                        ]}),
+                                {
+                                    loader: require.resolve('postcss-loader'),
+                                    options: {
+                                        // Necessary for external CSS imports to work
+                                        // https://github.com/facebookincubator/create-react-app/issues/2677
+                                        ident: 'postcss',
+                                        config: {
+                                            path: './postcss.config.js'
+                                        },
+                                        plugins: () => [
+                                            require('postcss-flexbugs-fixes'),
+                                            autoprefixer({
+                                                browsers: [
+                                                    '>1%',
+                                                    'last 4 versions',
+                                                    'Firefox ESR',
+                                                    'not ie < 9', // React doesn't support IE8 anyway
+                                                ],
+                                                flexbox: 'no-2009',
+                                            }),
+                                        ],
+                                    },
+                                },
+                            ]
+                        }),
                     },
                     // "file" loader makes sure those assets get served by WebpackDevServer.
                     // When you `import` an asset, you get its (virtual) filename.

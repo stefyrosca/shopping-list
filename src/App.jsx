@@ -3,6 +3,9 @@ import styles from './App.css';
 import {Route, Router, Switch} from 'react-router'
 import {routes} from './pages'
 import {Link} from "react-router-dom";
+import {createInitialStore} from "./store/create-store";
+import Provider from "react-redux/es/components/Provider";
+import createHistory from 'history/createBrowserHistory'
 
 class App extends Component {
     render() {
@@ -43,4 +46,12 @@ class App extends Component {
     }
 }
 
-export default App;
+
+const history = createHistory();
+
+const store = createInitialStore(history);
+
+export default <Provider store={store}>
+    <App history={history}/>
+</Provider>;
+
