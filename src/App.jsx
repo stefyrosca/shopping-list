@@ -51,7 +51,10 @@ const history = createHistory();
 
 const store = createInitialStore(history);
 
-export default <Provider store={store}>
-    <App history={history}/>
-</Provider>;
+export const Wrapper = (Component, props = {}) => {
+    return <Provider store={store}>
+        <Component {...props}/>
+    </Provider>;
+};
 
+export default Wrapper(App, {history});
