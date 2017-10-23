@@ -1,4 +1,6 @@
 @value blueGrey800, blueGrey50 from "../../colors.css";
+@value category from '../../index.css';
+
 
 .wrapper {
     max-width: 50%;

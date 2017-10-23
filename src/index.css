@@ -1,5 +1,5 @@
 @value filterWidth: 250px;
-@value grey50, blueGrey800, blueGrey50, deepOrange500 from "./colors.css";
+@value grey50, grey200, blueGrey800, blueGrey50, deepOrange500 from "./colors.css";
 
 html {
     font-family: 'Roboto', sans-serif;
@@ -65,4 +65,11 @@ ul {
     vertical-align: middle;
     background-color: #777;
     border-radius: 10px;
+}
+
+.category {
+    text-align: right;
+    background-color: grey200;
+    padding-right: 5px;
+    border-right: 5px solid;
 }
