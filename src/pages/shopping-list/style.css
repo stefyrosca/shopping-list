@@ -1,4 +1,5 @@
 @value blueGrey800, grey50, deepOrange500, blueGrey50, blue100, blue200, blue400, blueGrey100, blueGrey500, blue150 from "../../colors.css";
+@value filterWidth from "../../index.css";
 
 .btn {
     display: inline-block;
@@ -153,6 +154,11 @@
     background-color: blueGrey50;
     padding: 5px;
     flex: 3;
+}
+
+.input-field {
+    composes: input-field from '../../index.css';
+    max-width: filterWidth;
 }
 
 .input-number {

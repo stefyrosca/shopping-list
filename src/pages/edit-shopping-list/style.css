@@ -20,8 +20,3 @@
     composes: input-text;
     flex: 1;
 }
-
-.label {
-    composes: label from '../shopping-list/style.css';
-    font-size: medium;
-}
