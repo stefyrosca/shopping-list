@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import styles from './style.css'
 import {availableStatusFilters} from "../model/shopping-list";
+import {Chip, Drawer, MenuItem, RaisedButton, SelectField, TextField} from "material-ui";
+import {blueGrey50, blueGrey800} from "material-ui/styles/colors";
 
 export class FilterShoppingListsComponent extends Component {
     timeout;
@@ -19,52 +21,66 @@ export class FilterShoppingListsComponent extends Component {
     }
 
     render() {
+        let inputStyle = {
+            padding: '0.2em 0.25em',
+            fontSize: '1.1em',
+            color: blueGrey800,
+            backgroundColor: blueGrey50
+        };
         return <div ref={(event) => this.container = event}>
             {!this.state.open && <div className={styles['toggle-button']}>
-                Show filters
-                <button onClick={() => {
-                    this.setState({...this.state, open: !this.state.open})
-                }}><span>&rArr;</span></button>
-                </div>
+                <RaisedButton
+                    onClick={() => {
+                        this.setState({...this.state, open: !this.state.open})
+                    }}
+                    label={'Show filters'}
+                    secondary={true}
+                />
+            </div>
             }
-            <div data-open={this.state.open} className={styles['filter-container']}>
-                <div className={`${styles.input} ${styles.col}`}>
-                    <label className={styles.label}>Title</label>
-                    <input className={styles['input-field']} value={this.state.title}
-                           onChange={(event) => this.updateFilters('title', event.target.value, () => this.filterItems(800))}/>
-                </div>
-                <div className={`${styles.input} ${styles.col}`}>
-                    <label className={styles.label}>Status</label>
-                    <select className={styles['input-field']} value={this.state.status}
-                            onChange={(event) => this.updateFilters('status', event.target.value, this.filterItems)}>
-                        {Object.keys(availableStatusFilters).map(key => {
-                            let filter = availableStatusFilters[key];
-                            return <option key={key} value={filter.key}>{filter.value}</option>
-                        })}
-                    </select>
-                </div>
-                <div className={`${styles.input} ${styles.col}`}>
-                    <label className={styles.label}>Item</label>
-                    <input className={styles['input-field']} value={this.state.items.newItem}
-                           onChange={(event) => this.setState({
-                               ...this.state,
-                               items: {
-                                   newItem: event.target.value,
-                                   selectedItems: this.state.items.selectedItems
-                               }
-                           })}
-                           onKeyPress={(event) => event.charCode === 13 && this.addFilterItem(event.target.value)}/>
-                </div>
+            <Drawer open={this.state.open} className={styles['filter-container']}>
+                <TextField
+                    floatingLabelText={'Title'}
+                    value={this.state.title}
+                    onChange={(event) => this.updateFilters('title', event.target.value, () => this.filterItems(800))}
+                    style={inputStyle}
+                />
+                <SelectField
+                    floatingLabelText={'Status'}
+                    value={this.state.status}
+                    onChange={(event, index, value) => this.updateFilters('status', value, () => this.filterItems(800))}
+                    style={inputStyle}
+                >
+                    {Object.keys(availableStatusFilters).map(key => {
+                        let filter = availableStatusFilters[key];
+                        return <MenuItem key={key} value={filter.key} primaryText={filter.value}/>
+                    })}
+                </SelectField>
+                <TextField
+                    floatingLabelText={'Item'}
+                    value={this.state.items.newItem}
+                    onChange={(event) => this.setState({
+                        ...this.state,
+                        items: {
+                            newItem: event.target.value,
+                            selectedItems: this.state.items.selectedItems
+                        }
+                    })}
+                    style={inputStyle}
+                    onKeyPress={(event) => event.charCode === 13 && this.addFilterItem(event.target.value)}
+                />
                 <div>
                     {this.state.items.selectedItems.map((item, index) => {
-                        return <span key={index} className={styles.badge}>
+                        return <span key={index}>
+                            <Chip
+                                onRequestDelete={() => this.removeFilterItem(item)}
+                            >
                             {item}
-                            <span onClick={() => this.removeFilterItem(item)}
-                                  className={`${styles.close}`}>&times;</span>
+                            </Chip>
                         </span>
                     })}
                 </div>
-            </div>
+            </Drawer>
         </div>
     }
 

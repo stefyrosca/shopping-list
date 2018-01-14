@@ -21,7 +21,10 @@ actionHandler[ShoppingListActions.FILTER_SHOPPING_LISTS] = (state, action) => {
         }
         if (!matching)
             return matching;
-        let foundItems = list.items.filter(item => action.payload.items.selectedItems.find(sItem => item.name.toLowerCase().indexOf(sItem.toLowerCase()) !== -1));
+        let categories = Object.keys(list.items);
+        let allItems = categories.reduce((acc, value) => acc.concat(list.items[value]), []);
+        let foundItems = allItems.filter(item => action.payload.items.selectedItems
+                    .find(sItem => item.name.toLowerCase().indexOf(sItem.toLowerCase()) !== -1));
         if (foundItems.length >= action.payload.items.selectedItems.length)
             matching = matching && true;
         else
