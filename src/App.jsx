@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import styles from './App.css';
-import {Route, Router, Switch} from 'react-router'
+import {Redirect, Route, Router, Switch} from 'react-router'
 import {routes} from './pages'
 import {Link} from "react-router-dom";
 import {createInitialStore} from "./store/create-store";
 import Provider from "react-redux/es/components/Provider";
 import createHistory from 'history/createBrowserHistory'
 import {MuiThemeProvider} from "material-ui";
+import {PATHS} from "./pages/index";
+import {connect} from "react-redux";
 
 class App extends Component {
     render() {
@@ -21,14 +23,16 @@ class App extends Component {
                                         <div className={styles["navbar-header"]}>
                                             <h1 className={styles["App-header"]}>Shopping list</h1>
                                         </div>
-                                        <ul className={`${styles.nav} ${styles['navbar-nav']}`}>
-                                            {routes
-                                                .filter(route => route.shouldDisplay)
-                                                .map((route, index) => {
-                                                    return <li key={index}><Link
-                                                        to={route.path}>{route.display}</Link></li>
-                                                })}
-                                        </ul>
+                                        {this.props.auth.isLoggedIn &&
+                                            <ul className={`${styles.nav} ${styles['navbar-nav']}`}>
+                                                {routes
+                                                    .filter(route => route.shouldDisplay)
+                                                    .map((route, index) => {
+                                                        return <li key={index}><Link
+                                                            to={route.path}>{route.display}</Link></li>
+                                                    })}
+                                            </ul>
+                                        }
                                     </div>
 
                                 </nav>
@@ -36,8 +40,12 @@ class App extends Component {
                             <div className={styles.App}>
                                 <Switch>
                                     {routes.map((route, index) => {
+                                        if (route.private)
+                                            return <PrivateRoute component={route.component} path={route.path}
+                                                                 exact={route.exact}
+                                                                 key={index} {...this.props}/>
                                         return <Route component={route.component} path={route.path} exact={route.exact}
-                                                      key={index}/>
+                                                      key={index} {...this.props}/>
                                     })}
                                 </Switch>
                             </div>
@@ -49,6 +57,22 @@ class App extends Component {
     }
 }
 
+const PrivateRoute = ({component: Component, ...rest}) => {
+    return (
+        <Route {...rest} render={props => {
+            return (
+                rest.auth.isLoggedIn ? (
+                    <Component {...props}/>
+                ) : (
+                    <Redirect to={{
+                        pathname: PATHS.LOGIN,
+                        state: {from: props.location}
+                    }}/>
+                )
+            )
+        }}/>
+    );
+};
 
 const history = createHistory();
 
@@ -60,4 +84,4 @@ export const Wrapper = (Component, props = {}) => {
     </Provider>;
 };
 
-export default Wrapper(App, {history});
+export default Wrapper(connect(state => ({...state}), {})(App), {history});

@@ -12,7 +12,11 @@ actionHandler[AuthActions.LOGIN_SUCCEEDED] = (state, action) => {
     this.props.history.replace(PATHS.DASHBOARD);
 };
 
-export default (state = {isLoggedIn: false}, action) => {
+const initialState = {
+    isLoggedIn: localStorage.getItem('TOKEN') !== null
+};
+
+export default (state = initialState, action) => {
     const handler = actionHandler[action.type];
     return handler ? handler(state, action) : state;
 }
