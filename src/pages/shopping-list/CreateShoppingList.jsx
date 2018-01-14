@@ -5,6 +5,7 @@ import {Item, ItemCategory} from "../../model/item";
 import {ShoppingList} from "../../model/shopping-list";
 import {addShoppingList} from "./shopping-list.actions";
 import {PATHS} from "../index";
+import {List, ListItem, MenuItem, RaisedButton, SelectField, TextField} from "material-ui";
 
 class CreateShoppingListComponent extends Component {
 
@@ -20,72 +21,73 @@ class CreateShoppingListComponent extends Component {
     render() {
         return <div className={styles['list-group']}>
             <div><h3>Create new shopping list</h3></div>
+            <TextField
+                floatingLabelText={'Title'}
+                value={this.state.title}
+                onChange={(event) => this.setState({...this.state, title: event.target.value})}
+                className={styles['input-text']}
+            />
             <div>
-                <label className={styles.label}>Title</label>
-                <input className={styles['input-text']}
-                       value={this.state.title}
-                       onChange={(event) => this.setState({...this.state, title: event.target.value})}/>
-            </div>
-            <div>
-                <ul>
+                <List>
                     {Object.keys(this.state.items)
                         .map(category => this.state.items[category])
                         .map((items, index) => {
-                            return <li key={index} className={styles['list-group-item-info']}>
-                                <div>
-                                    {items[0].category}
-                                </div>
-                                {items.map((item, index) => {
-                                    return <div className={styles.row} key={index}>
-                                        <div
-                                            className={`${styles['col-3']} ${styles['align-start']} `}>{item.name}</div>
-                                        <div className={styles['col']}>{item.quantity}</div>
-                                    </div>
-                                })}
-                            </li>
+                            return <ListItem key={index} className={styles['list-group-item-info']}
+                                             primaryText={items[0].category}
+                                             primaryTogglesNestedList={true}
+                                             initiallyOpen={true}
+                                             disabled={true}
+                                             nestedItems={items.map((item, index) => {
+                                                 return <div className={styles.row} key={index}>
+                                                     <div
+                                                         className={`${styles['col-3']} ${styles['align-start']} `}>{item.name}</div>
+                                                     <div className={styles['col']}>{item.quantity}</div>
+                                                 </div>
+                                             })}
+                            >
+                            </ListItem>
                         })}
                     {this.state.items.length === 0 &&
-                    <li className={styles['list-group-item-info']}>
-                        <span>No products added</span>
-                    </li>
+                    <ListItem className={styles['list-group-item-info']} primaryText={<span>No products added</span>}/>
                     }
-                </ul>
+                </List>
             </div>
             <div className={styles['align-start']}>
                 <div className={styles.row}>
                     <div className={styles['col-2']}>
-                        <span className={styles.label}>Description</span>
-                        <input className={styles['input-text']}
-                               value={this.state.newItem.description}
-                               onChange={(event) => this.updateValue('description', event.target.value)}/>
-                    </div>
-                    <div className={styles['col']}>
-                        <span className={styles.label}>Quantity</span>
-                        <input className={styles['input-number']}
-                               type={"number"} value={this.state.newItem.quantity}
-                               onChange={(event) => this.updateValue('quantity', event.target.value)}/>
+                        <TextField
+                            floatingLabelText={'Description'}
+                            value={this.state.newItem.description}
+                            onChange={(event) => this.updateValue('description', event.target.value)}
+                            className={styles['input-text']}
+                        />
                     </div>
                     <div className={styles['col-2']}>
-                        <span className={styles.label}>Category</span>
-                        <select className={styles['input-field']} value={this.state.newItem.category}
-                                onChange={(event) => this.updateValue('category', event.target.value)}>
+                        <TextField
+                            floatingLabelText={'Quantity'}
+                            value={this.state.newItem.quantity}
+                            onChange={(event) => this.updateValue('quantity', event.target.value)}
+                            className={styles['input-number']}
+                        />
+                    </div>
+                    <div className={styles['col-2']}>
+                        <SelectField
+                            floatingLabelText={'Category'}
+                            value={this.state.newItem.category}
+                            onChange={(event, index, value) => this.updateValue('category', value)}
+                            className={styles['input-field']}
+                        >
                             {Object.keys(ItemCategory).map(key => {
-                                return <option key={key} value={key}>{ItemCategory[key]}</option>
+                                return <MenuItem key={key} value={key} primaryText={ItemCategory[key]}/>
                             })}
-                        </select>
+                        </SelectField>
                     </div>
                 </div>
             </div>
             <div>
-                <button className={styles['btn-primary-left']} onClick={this.reset}>
-                    Reset
-                </button>
-                <button className={styles['btn-primary-right']} onClick={this.addNewItem}>
-                    Add
-                </button>
-                <button className={styles['btn-primary-right']} onClick={this.onSave}>
-                    Save
-                </button>
+                <RaisedButton style={{margin: '6px 12px'}} secondary={true} onClick={this.reset} label={'Reset'}/>
+                <RaisedButton style={{margin: '6px 12px'}} secondary={true} onClick={this.addNewItem} label={'Add'}/>
+                <RaisedButton style={{margin: '6px 12px'}} primary={true} onClick={this.onSave} label={'Save'}/>
             </div>
         </div>
     }
@@ -103,7 +105,11 @@ class CreateShoppingListComponent extends Component {
     addNewItem() {
         let item = new Item(this.state.newItem.description, this.state.newItem.quantity, this.state.newItem.category);
         let categoryItems = this.state.items[item.category] ? [...this.state.items[item.category], item] : [item];
-        this.setState({...this.state, items: {...this.state.items, [item.category]: categoryItems}, newItem: {quantity: 1, description: '', category: ItemCategory.other}});
+        this.setState({
+            ...this.state,
+            items: {...this.state.items, [item.category]: categoryItems},
+            newItem: {quantity: 1, description: '', category: ItemCategory.other}
+        });
     }
 
     onSave() {
