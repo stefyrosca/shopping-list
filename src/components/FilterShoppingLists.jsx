@@ -39,6 +39,7 @@ export class FilterShoppingListsComponent extends Component {
             </div>
             }
             <Drawer open={this.state.open} className={styles['filter-container']}>
+                <div><h4>Filter by:</h4></div>
                 <TextField
                     floatingLabelText={'Title'}
                     value={this.state.title}
@@ -48,7 +49,7 @@ export class FilterShoppingListsComponent extends Component {
                 <SelectField
                     floatingLabelText={'Status'}
                     value={this.state.status}
-                    onChange={(event, index, value) => this.updateFilters('status', value, () => this.filterItems(800))}
+                    onChange={(event, index, value) => this.updateFilters('status', value, () => this.filterItems(0))}
                     style={inputStyle}
                 >
                     {Object.keys(availableStatusFilters).map(key => {
