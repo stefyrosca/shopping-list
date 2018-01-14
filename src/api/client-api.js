@@ -34,7 +34,12 @@ class ClientApi {
         if (error || response.statusCode < 200 || response.statusCode > 299) {
             return reject(error);
         }
-        return resolve(JSON.parse(body));
+
+        try {
+            return resolve(JSON.parse(body));
+        } catch (e) {
+            return body;
+        }
     };
 
     get(path = '', query = null, headers = this.headers) {
@@ -45,7 +50,7 @@ class ClientApi {
 
     post(path = '', query = null, body = {}, headers = this.headers) {
         return new Promise((resolve, reject) => {
-            request.post({url: this.urlBuilder(path, query), headers, body}, this.callback(resolve, reject));
+            request.post({url: this.urlBuilder(path, query), headers, body, json: true}, this.callback(resolve, reject));
         });
     }
 
@@ -62,5 +67,5 @@ class ClientApi {
     }
 }
 
-export const clientApi = new ClientApi({url: 'localhost', port: 8080}, {});
+export const clientApi = new ClientApi({url: 'localhost', port: 3000}, {"Content-Type": "application/json"});
 // export const clientApi = new ClientApi({url: 'jsonplaceholder.typicode.com', port: 80}, {});

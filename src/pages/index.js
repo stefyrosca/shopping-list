@@ -15,9 +15,9 @@ export const PATHS = {
 }
 
 export const routes = [
+    {path: PATHS.LOGIN, exact: true, component: LoginComponent, display: 'Login', shouldDisplay: true},
     {path: PATHS.HOME, exact: true, component: DashboardComponent, display: 'Home', shouldDisplay: true},
-    {path: PATHS.LOGIN, exact: true, component: LoginComponent, display: 'Login', shouldDisplay: false},
-    {path: PATHS.REGISTER, exact: true, component: RegisterComponent, display: 'Register', shouldDisplay: false},
+    {path: PATHS.REGISTER, exact: true, component: RegisterComponent, display: 'Register', shouldDisplay: true},
     {path: PATHS.CREATE_LIST, exact: true, component: CreateShoppingListComponent, display: 'Create new list', shouldDisplay: true},
     {path: PATHS.VIEW_LIST, component: EditShoppingListComponent, display: 'Edit shopping list', shouldDisplay: false},
     {path: PATHS.DASHBOARD, component: DashboardComponent, display: 'Dashboard', shouldDisplay: true},

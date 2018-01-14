@@ -30,7 +30,6 @@ class LoginComponent extends Component {
     };
 
     componentWillMount() {
-        console.log(this.props);
         this.props.auth.isLoggedIn && this.props.history.replace(PATHS.DASHBOARD);
     }
 
