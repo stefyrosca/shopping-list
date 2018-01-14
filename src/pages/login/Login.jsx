@@ -1,9 +1,11 @@
 import React, {Component} from "react";
-import {Card, CardActions, CardText, CardTitle, RaisedButton, TextField} from "material-ui"
+import {Card, CardActions, CardText, CardTitle, FlatButton, RaisedButton, TextField} from "material-ui"
 import {red300} from "material-ui/styles/colors"
 import {connect} from "react-redux";
 import {clientApi} from "../../api/client-api";
 import {PATHS} from "../index";
+import {bindActionCreators} from "redux";
+import {login} from "./auth.actions";
 
 class LoginComponent extends Component {
     constructor(props) {
@@ -16,6 +18,7 @@ class LoginComponent extends Component {
     }
 
     login = () => {
+        //TODO: move logic to actions
         clientApi.post('login', null, {username: this.state.username, password: this.state.password})
             .then(response => {
                 this.props.history.replace(PATHS.DASHBOARD);
@@ -23,7 +26,13 @@ class LoginComponent extends Component {
             .catch(error => {
                 this.setState({error: error})
             });
+        // this.props.login(this.state.username, this.state.password);
     };
+
+    componentWillMount() {
+        console.log(this.props);
+        this.props.auth.isLoggedIn && this.props.history.replace(PATHS.DASHBOARD);
+    }
 
     render() {
         return <div>
@@ -49,15 +58,21 @@ class LoginComponent extends Component {
                         onClick={this.login}
                         disabled={this.state.username === '' || this.state.password === ''}
                     />
+                    <br/>
+                    <FlatButton
+                        label={'Don\'t have an account? Register here!'}
+                        primary={true}
+                        onClick={() => this.props.history.push(PATHS.REGISTER)}
+                    />
                 </CardActions>
                 {this.state.error &&
-                    <CardText color={red300}>
-                        {'Something went wrong, please try again'}
-                    </CardText>
+                <CardText color={red300}>
+                    {'Something went wrong, please try again'}
+                </CardText>
                 }
             </Card>
         </div>
     }
 }
 
-export default connect(state => state.auth, {})(LoginComponent);
+export default connect(state => ({auth: state.auth}), (dispatch) => bindActionCreators({login}, dispatch))(LoginComponent);

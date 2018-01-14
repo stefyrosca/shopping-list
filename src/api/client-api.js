@@ -62,5 +62,5 @@ class ClientApi {
     }
 }
 
-// export const clientApi = new ClientApi({url: 'localhost', port: 8080}, {});
-export const clientApi = new ClientApi({url: 'jsonplaceholder.typicode.com', port: 80}, {});
+export const clientApi = new ClientApi({url: 'localhost', port: 8080}, {});
+// export const clientApi = new ClientApi({url: 'jsonplaceholder.typicode.com', port: 80}, {});
