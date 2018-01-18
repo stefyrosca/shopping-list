@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {clientApi} from "../../api/client-api";
 import {PATHS} from "../index";
 import {bindActionCreators} from "redux";
-import {login} from "./auth.actions";
+import {login, loginSucceeded} from "./auth.actions";
 
 class LoginComponent extends Component {
     constructor(props) {
