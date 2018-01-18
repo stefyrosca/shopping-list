@@ -11,7 +11,6 @@ actionHandler[AuthActions.LOGIN] = (state, action) => {
 
 actionHandler[AuthActions.LOGIN_SUCCEEDED] = (state, action) => {
     localStorage.setItem('TOKEN', JSON.stringify(action.payload));
-    this.props.history.replace(PATHS.DASHBOARD);
     return {...state, isLoggedIn: true};
 };
 

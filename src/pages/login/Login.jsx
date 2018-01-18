@@ -22,6 +22,7 @@ class LoginComponent extends Component {
         clientApi.post('login', null, {username: this.state.username, password: this.state.password})
             .then(response => {
                 this.props.loginSucceeded(response);
+                this.props.history.replace(PATHS.DASHBOARD);
             })
             .catch(error => {
                 this.setState({error: error})
