@@ -38,7 +38,7 @@ class ClientApi {
         try {
             return resolve(JSON.parse(body));
         } catch (e) {
-            return body;
+            return resolve(body);
         }
     };
 
@@ -67,5 +67,7 @@ class ClientApi {
     }
 }
 
-export const clientApi = new ClientApi({url: 'localhost', port: 3000}, {"Content-Type": "application/json"});
+export const clientApi = new ClientApi({url: 'localhost', port: 3000}, {
+    "Content-Type": "application/json"
+});
 // export const clientApi = new ClientApi({url: 'jsonplaceholder.typicode.com', port: 80}, {});
