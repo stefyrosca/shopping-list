@@ -21,9 +21,7 @@ class LoginComponent extends Component {
         //TODO: move logic to actions
         clientApi.post('login', null, {username: this.state.username, password: this.state.password})
             .then(response => {
-                this.props.auth.isLoggedIn = response;
-                localStorage.setItem('TOKEN', JSON.stringify(response));
-                this.props.history.replace(PATHS.DASHBOARD);
+                this.props.loginSucceeded(response);
             })
             .catch(error => {
                 this.setState({error: error})
@@ -75,4 +73,4 @@ class LoginComponent extends Component {
     }
 }
 
-export default connect(state => ({auth: state.auth}), (dispatch) => bindActionCreators({login}, dispatch))(LoginComponent);
+export default connect(state => ({auth: state.auth}), (dispatch) => bindActionCreators({login, loginSucceeded}, dispatch))(LoginComponent);

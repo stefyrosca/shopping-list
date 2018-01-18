@@ -6,5 +6,5 @@ export const AuthActions = {
 };
 
 export const login = (username, password) => ({type: AuthActions.LOGIN, payload: {username, password}});
-export const loginSucceeded = () => ({type: AuthActions.LOGIN_SUCCEEDED});
+export const loginSucceeded = (response) => ({type: AuthActions.LOGIN_SUCCEEDED, payload: response});
 export const registerSucceeded = () => ({type: AuthActions.REGISTER_SUCCEEDED});
