@@ -21,6 +21,7 @@ class LoginComponent extends Component {
         //TODO: move logic to actions
         clientApi.post('login', null, {username: this.state.username, password: this.state.password})
             .then(response => {
+                this.props.auth.isLoggedIn = response;
                 localStorage.setItem('TOKEN', JSON.stringify(response));
                 this.props.history.replace(PATHS.DASHBOARD);
             })

@@ -27,6 +27,8 @@ class RegisterComponent extends Component {
             lastName: this.state.lastName
         })
             .then(response => {
+                this.props.auth.isLoggedIn = response;
+                localStorage.setItem('TOKEN', JSON.stringify(response));
                 this.props.history.replace(PATHS.DASHBOARD);
             })
             .catch(error => {
