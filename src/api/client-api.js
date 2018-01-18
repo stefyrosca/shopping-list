@@ -32,7 +32,7 @@ class ClientApi {
 
     callback = (resolve, reject) => (error, response, body) => {
         if (error || response.statusCode < 200 || response.statusCode > 299) {
-            return reject(error);
+            return reject(error || body);
         }
 
         try {

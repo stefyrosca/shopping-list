@@ -4,7 +4,9 @@ import {PATHS} from "../index";
 const actionHandler = {};
 
 actionHandler[AuthActions.LOGIN] = (state, action) => {
-    //TODO: implement login logic in actions
+    console.log("aaa");
+    if (localStorage.getItem('TOKEN'))
+        this.props.history.replace(PATHS.DASHBOARD);
     return state;
 };
 
