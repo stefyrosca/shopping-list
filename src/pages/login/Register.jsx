@@ -4,6 +4,8 @@ import {red300} from "material-ui/styles/colors"
 import {connect} from "react-redux";
 import {clientApi} from "../../api/client-api";
 import {PATHS} from "../index";
+import {loginSucceeded} from "./auth.actions";
+import {bindActionCreators} from "redux";
 
 class RegisterComponent extends Component {
     constructor(props) {
@@ -27,8 +29,7 @@ class RegisterComponent extends Component {
             lastName: this.state.lastName
         })
             .then(response => {
-                this.props.auth.isLoggedIn = response;
-                localStorage.setItem('TOKEN', JSON.stringify(response));
+                this.props.loginSucceeded(response);
                 this.props.history.replace(PATHS.DASHBOARD);
             })
             .catch(error => {
@@ -96,4 +97,4 @@ class RegisterComponent extends Component {
     }
 }
 
-export default connect(state => ({auth: state.auth}), {})(RegisterComponent);
+export default connect(state => ({auth: state.auth}), (dispatch) => bindActionCreators({loginSucceeded}, dispatch))(RegisterComponent);
