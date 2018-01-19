@@ -23,6 +23,17 @@
     opacity: .2;
 }
 
+.panel {
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-bottom: 3px solid blueGrey100;
+    border-radius: 4px;
+    /*background-color: blue200;*/
+    box-shadow: 0px 5px 5px blueGrey100;
+    transition: all ease-out 0.2s;
+    transition-property: all;
+}
+
 .wrapper {
     padding-right: 15px;
     padding-left: 15px;
@@ -85,4 +96,8 @@
 
 .col-3 {
     flex: 3;
+}
+
+.btn {
+    composes: btn from '../../index.css';
 }
